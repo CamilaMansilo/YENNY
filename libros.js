@@ -34,8 +34,10 @@ window.onload = function() {
     var originalLibros = [...libros];
 
     function mostrarLibros(librosFiltrados) {
-        lista.innerHTML = "";
-        librosFiltrados.forEach(libro => {
+
+        lista.innerHTML = ""; 
+        librosFiltrados.forEach((libro,index) => {
+
             var elemento = document.createElement("li");
 
             var titulo = document.createElement("h3");
@@ -66,7 +68,7 @@ window.onload = function() {
             // Botón "Comprar"
             var boton = document.createElement("a");
             boton.textContent = "Comprar";
-            boton.href = "compra.html";
+            boton.href = "compra.html?"+index;
             boton.classList.add("boton");
 
            // Botón "Estatus"
@@ -75,7 +77,7 @@ window.onload = function() {
             var botonInterno = document.createElement("button");
             botonInterno.id = "boton";
             botonInterno.textContent = "Estatus";
-            botonInterno.classList.add("boton");  // Añade la clase 'boton' aquí
+            botonInterno.classList.add("boton");
             botonEstatus.appendChild(botonInterno);
 
 
@@ -115,4 +117,30 @@ window.onload = function() {
     mostrarLibros(originalLibros);
 
     document.getElementById("filtrar").addEventListener("click", filtrarLibros);
+
 };
+
+// Función para mostrar y ocultar la notificación
+function Aviso() {
+    var notificacion = document.getElementById("notificacion");
+    if (notificacion.style.display === "none" || notificacion.style.display === "") {
+        notificacion.style.display = "block";
+    } else {
+        notificacion.style.display = "none";
+    }
+
+
+}
+
+setTimeout(function() {
+
+    document.getElementById('loading').classList.add('fade-out');
+    
+    
+    setTimeout(function() {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('contenidoPrincipal').style.display = 'block';
+    }, 200);
+}, 3000);
+
+
